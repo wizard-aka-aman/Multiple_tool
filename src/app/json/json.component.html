@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6" style="background-color: rgb(139, 246, 246); height: 94vh;">
+            <span class="fs-3 me-4" style="font-weight: 500;">Text</span>
+            <span class="btn btn-primary mb-2 " (click)="copy()" >Copy</span>
+            <textarea  [(ngModel)]="text" class=" w-100 " style="  height: 80vh;"></textarea>
+        <div class="btn btn-secondary" (click)="onSend()">Json View </div>    
+        </div>
+        <div class="col-6" style="background-color: rgb(156, 237, 175); height: 94vh; display: flex; flex-direction: column;">
+            <h3>Viewer</h3>
+            
+            <!-- Scrollable container with fixed height -->
+            <div style="height: 90%; overflow: auto;  ">
+              <div style="min-height: 0;">
+                <ngx-json-viewer  [expanded]="false" [json]="viwer"></ngx-json-viewer>
+              </div>
+            </div>
+          </div>
+          
+          
+          
+    </div>
+</div>

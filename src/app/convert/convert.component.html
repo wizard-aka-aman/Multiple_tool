@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6" style="position: relative;background-color: rgb(139, 246, 246); height: 92vh;">
+            <div class="text-center mt-3 fs-1 " style="font-weight: 500;">
+                  PDF to WORD
+            </div>   
+            <div class="input text-center mt-5">
+             <form action="">
+                <input type="file" (change)="onFileSelected($event)"  class="form-control form-control-lg" />
+             </form>
+            </div>
+            <div class="btn btn-secondary "  (click)="pdftoword()" >
+                Convert 
+            </div> 
+            
+            <div class="spinner-border  " *ngIf="isappear"  style="  position: absolute; top: 50%; left: 50%;  width: 75px; height: 75px;" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+
+              <div *ngIf="isDownloadable" class="btn btn-secondary "  (click)="download()" >
+                Download 
+            </div> 
+        </div>
+        <div class="col-6" style=" position: relative;background-color: rgb(156, 237, 175); height: 92vh;  ">
+            <div class="text-center mt-3 fs-1 " style="font-weight: 500;">
+                WORD to PDF
+            </div>   
+            <div class="input text-center mt-5">
+             <form action="">
+                <input type="file" (change)="onFileSelected($event)"  class="form-control form-control-lg" />
+             </form>
+            </div>
+            <div class="btn btn-secondary "  (click)="wordtopdf()" >
+                Convert 
+            </div> 
+            
+            <div class="spinner-border  " *ngIf="isappearwtp"  style="  position: absolute; top: 50%; left: 50%;  width: 75px; height: 75px;" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+
+              <div *ngIf="isDownloadablewtp" class="btn btn-secondary "  (click)="download()" >
+                Download 
+            </div> 
+        </div>
+    </div>
+</div>

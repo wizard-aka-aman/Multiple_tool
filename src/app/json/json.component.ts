@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './json.component.css'
 })
 export class JsonComponent {
-  text :any =""; 
+  text :any ; 
   viwer:any[] =[] ; 
   constructor(private toastr: ToastrService) {
     
@@ -17,14 +17,19 @@ export class JsonComponent {
   }
   onSend(){
     console.log(this.text);
-    this.viwer = this.text
-    this.viwer = JSON.parse(this.text)
+    this.viwer = this.text;
+     
+    if(this.text == undefined){
+      this.toastr.error("Empty Json" , "Error")
+      return;
+    }
+    this.viwer = JSON.parse(this.text);
     console.log(this.viwer);
     
   }
   copy(){
-    this.toastr.success("Copied" , "Success")
-    navigator.clipboard.writeText(this.text)
+    this.toastr.success("Text Copied" , "Success");
+    navigator.clipboard.writeText(this.text);
      
   }
 }

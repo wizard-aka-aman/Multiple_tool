@@ -26,52 +26,74 @@ export class ConvertComponent {
   constructor(private http: HttpClient , private toastr: ToastrService) {
   }
 
+  ConvertFile(ToPdf :boolean){
+    const formData = new FormData(); 
+    console.log(this.selectedFile);
+    if(this.selectedFile == undefined){
+    this.toastr.error( "Select One File","Error");
+    return;
+    }
+    formData.append('file', this.selectedFile, this.selectedFile?.name);  
 
-  wordtopdf() {
-
-    const formData = new FormData();
-    // formData.append('file', this.selectedFile );
-    formData.append('file', this.selectedFile, this.selectedFile.name); // 'file' must match backend
-
-    const url = `${this.docxToPdf}?Secret=${this.apiKey}`;
+    const url = `${(ToPdf ? this.docxToPdf : this.PdfToDocx)}?Secret=${this.apiKey}`;
     console.log(url);
       this.isappearwtp = true;
     return this.http.post<any>(url, formData).subscribe({
       next : (response)=> {
       console.log(response);
-      const file = response.Files[0];
-      const base64 = file.FileData;
+      const file = response?.Files[0];
+      const base64 = file?.FileData;
       // Convert base64 to Blob
       const byteCharacters = atob(base64);
-      const byteNumbers = new Array(byteCharacters.length);
+      const byteNumbers = new Array(byteCharacters?.length);
       for (let i = 0; i < byteCharacters.length; i++) {
-        byteNumbers[i] = byteCharacters.charCodeAt(i);
+        byteNumbers[i] = byteCharacters?.charCodeAt(i); 
       }
       const byteArray = new Uint8Array(byteNumbers);
       const blob = new Blob([byteArray], { type: 'application/pdf' });
 
-      const downloadUrl = URL.createObjectURL(blob);
-      // const link = document.createElement('a');
-      // link.href = downloadUrl;
-      // link.download = file.FileName || 'converted.pdf';
-      // link.click();
+      const downloadUrl = URL?.createObjectURL(blob); 
       this.downloadUrl = downloadUrl;
-      this.FileName = file.FileName || 'converted.pdf'
+      this.FileName = file?.FileName || 'converted.pdf'
       this.isappearwtp = false;
+      this.isappear = false;
+      if(ToPdf){
+         
       this.isDownloadablewtp = true;
       this.toastr.success("Converted Word to Pdf!" , "Success")
+      }else{
+         
+        this.isDownloadable = true;
+        this.toastr.success("Converted Pdf to Word!" , "Success")
+      }
+      URL.revokeObjectURL(this.downloadUrl);
     },
     error :(err)=>{
       this.isappearwtp = false;
-      this.toastr.error(err.error.InvalidParameters.File ,"Error")
+      this.isappear = false;
+      if(err?.error?.InvalidParameters?.File == undefined){
+        this.isappearwtp = false;
+        this.isappear = false;
+        this.toastr.error("Error Occur in File" ,"Error")
+        return;
+      }
+      else if (err?.error?.InvalidParameters?.File != undefined){
+        this.toastr.error( err?.error?.InvalidParameters?.File,"Error")
+        return
+      }
+      else{
+        this.toastr.error( "Select One File","Error")
+      }
+      
+      URL.revokeObjectURL(this.downloadUrl);
     }
     });
-  }
+  } 
   onFileSelected(event: Event) {
     const fileInput = event.target as HTMLInputElement;
 
-    if (fileInput.files && fileInput.files.length > 0) {
-      this.selectedFile = fileInput.files[0];
+    if (fileInput?.files && fileInput?.files?.length > 0) {
+      this.selectedFile = fileInput?.files[0];
     }
     console.log(this.selectedFile);
     
@@ -84,43 +106,4 @@ export class ConvertComponent {
     URL.revokeObjectURL(this.downloadUrl);
   }
 
-  pdftoword(){
-    const formData = new FormData();
-    // formData.append('file', this.selectedFile );
-    formData.append('file', this.selectedFile, this.selectedFile.name); // 'file' must match backend
-
-    const url = `${this.PdfToDocx}?Secret=${this.apiKey}`;
-    console.log(url);
-      this.isappear = true;
-    return this.http.post<any>(url, formData).subscribe({
-      next: (response)=>{
-      console.log(response);
-      const file = response.Files[0];
-      const base64 = file.FileData;
-      // Convert base64 to Blob
-      const byteCharacters = atob(base64);
-      const byteNumbers = new Array(byteCharacters.length);
-      for (let i = 0; i < byteCharacters.length; i++) {
-        byteNumbers[i] = byteCharacters.charCodeAt(i);
-      }
-      const byteArray = new Uint8Array(byteNumbers);
-      const blob = new Blob([byteArray], { type: 'application/pdf' });
-
-      const downloadUrl = URL.createObjectURL(blob);
-      // const link = document.createElement('a');
-      // link.href = downloadUrl;
-      // link.download = file.FileName || 'converted.pdf';
-      // link.click();
-      this.downloadUrl = downloadUrl;
-      this.FileName = file.FileName || 'converted.pdf'
-      this.isappear = false;
-      this.isDownloadable = true;
-      this.toastr.success("Converted Pdf to Word!" , "Success")
-    },
-    error :(err)=>{
-      this.isappear = false;
-      this.toastr.error(err.error.InvalidParameters.File ,"Error")
-    }
-    });
-  }
 }

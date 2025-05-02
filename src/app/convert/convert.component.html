@@ -1,46 +1,46 @@
-<div class="container">
-    <div class="row">
-        <div class="col-6" style="position: relative;background-color: rgb(139, 246, 246); height: 92vh;">
-            <div class="text-center mt-3 fs-1 " style="font-weight: 500;">
-                  PDF to WORD
-            </div>   
-            <div class="input text-center mt-5">
-             <form action="">
-                <input type="file" (change)="onFileSelected($event)"  class="form-control form-control-lg" />
-             </form>
-            </div>
-            <div class="btn btn-secondary "  (click)="pdftoword()" >
-                Convert 
-            </div> 
-            
-            <div class="spinner-border  " *ngIf="isappear"  style="  position: absolute; top: 50%; left: 50%;  width: 75px; height: 75px;" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-
-              <div *ngIf="isDownloadable" class="btn btn-secondary "  (click)="download()" >
-                Download 
-            </div> 
+<div class="container-fluid">
+    <div class="row" style="height: 100vh; overflow: hidden;"> 
+      <div class="col-md-6 d-flex flex-column align-items-center p-4" style="background-color:  rgb(230, 255, 236);">
+        <h2 class="mb-5 mt-3 text-center">PDF to WORD</h2>
+  
+        <form class="w-75 text-center">
+          <input type="file" (change)="onFileSelected($event)" class="form-control form-control-lg mb-4" />
+        </form>
+  
+        <button class="btn btn-primary mb-3" (click)="ConvertFile(false)">Convert</button>
+  
+        
+        <div *ngIf="isappear" class="d-flex justify-content-center align-items-center" 
+             style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+          <div class="spinner-border" role="status" style="width: 4rem; height: 4rem;">
+            <span class="visually-hidden">Converting...</span>
+          </div>
         </div>
-        <div class="col-6" style=" position: relative;background-color: rgb(156, 237, 175); height: 92vh;  ">
-            <div class="text-center mt-3 fs-1 " style="font-weight: 500;">
-                WORD to PDF
-            </div>   
-            <div class="input text-center mt-5">
-             <form action="">
-                <input type="file" (change)="onFileSelected($event)"  class="form-control form-control-lg" />
-             </form>
-            </div>
-            <div class="btn btn-secondary "  (click)="wordtopdf()" >
-                Convert 
-            </div> 
-            
-            <div class="spinner-border  " *ngIf="isappearwtp"  style="  position: absolute; top: 50%; left: 50%;  width: 75px; height: 75px;" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
+  
+        
+        <button *ngIf="isDownloadable" class="btn btn-success mt-3" (click)="download()">Download</button>
+      </div>
 
-              <div *ngIf="isDownloadablewtp" class="btn btn-secondary "  (click)="download()" >
-                Download 
-            </div> 
+      <div class="col-md-6 d-flex flex-column align-items-center p-4" style="background-color: #454545;">
+        <h2 class="mb-5 mt-3 text-center " style="color: white;">WORD to PDF</h2>
+  
+        <form class="w-75 text-center">
+          <input type="file" (change)="onFileSelected($event)" class="form-control form-control-lg mb-4" />
+        </form>
+  
+        <button class="btn btn-primary mb-3" (click)="ConvertFile(true)">Convert</button>
+  
+        
+        <div *ngIf="isappearwtp" class="d-flex justify-content-center align-items-center" 
+             style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+          <div class="spinner-border" role="status" style="width: 4rem; height: 4rem;">
+            <span class="visually-hidden">Converting...</span>
+          </div>
         </div>
+  
+        
+        <button *ngIf="isDownloadablewtp" class="btn btn-success mt-3" (click)="download()">Download</button>
+      </div>
     </div>
-</div>
+  </div>
+  

@@ -1,23 +1,49 @@
-<div class="container">
+<!-- <div class="container">
     <div class="row">
-        <div class="col-6" style="background-color: rgb(139, 246, 246); height: 94vh;">
-            <span class="fs-3 me-4" style="font-weight: 500;">Text</span>
-            <span class="btn btn-primary mb-2 " (click)="copy()" >Copy</span>
-            <textarea  [(ngModel)]="text" class=" w-100 " style="  height: 80vh;"></textarea>
+        <div class="col-6" style="background-color: rgb(35, 36, 36); height: 88.5vh;">
+            <span class="fs-3 me-4 d-flex justify-content-center  " style="font-weight: 500; color: white;">Text
+              
+              <span class="btn btn-outline-light mb-2 ms-5 my-1   " (click)="copy()" >Copy</span>
+            </span>
+            <textarea  [(ngModel)]="text" class=" w-100 " style="  height: 75vh;"></textarea>
         <div class="btn btn-secondary" (click)="onSend()">Json View </div>    
         </div>
-        <div class="col-6" style="background-color: rgb(156, 237, 175); height: 94vh; display: flex; flex-direction: column;">
-            <h3>Viewer</h3>
+        <div class="col-6" style="background-color: rgb(163, 253, 184); height: 88.5vh; display: flex; flex-direction: column;">
+            <h3 class="text-center">Viewer</h3>
             
-            <!-- Scrollable container with fixed height -->
-            <div style="height: 90%; overflow: auto;  ">
+            
+            <div style="height: 90%; overflow: auto;  " >
               <div style="min-height: 0;">
                 <ngx-json-viewer  [expanded]="false" [json]="viwer"></ngx-json-viewer>
               </div>
             </div>
-          </div>
-          
-          
-          
+          </div> 
     </div>
+</div> -->
+<div class="container-fluid">
+  <div class="row" style="height: 88.5vh; overflow: hidden;">
+    
+    <div class="col-md-6 d-flex flex-column p-4 text-white" style="background-color: #232424;">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class=" ">Text Input</h4>
+        <button class="btn btn-outline-light" (click)="copy()" title="Copy to clipboard">Copy</button>
+      </div>
+
+      <textarea [(ngModel)]="text" class="form-control flex-grow-1 mb-3" 
+        style="resize: none; min-height: 70vh;" placeholder="Enter your text here..."></textarea>
+
+      <button class="btn btn-success align-self-end" (click)="onSend()">View as JSON</button>
+    </div>
+
+    <div class="col-6" style="background-color: rgb(230, 255, 236); height: 88.5vh; display: flex; flex-direction: column;">
+      <h3 class="text-center">Viewer</h3>
+      
+      
+      <div style="height: 90%; overflow: auto;  " >
+        <div style="min-height: 0;">
+          <ngx-json-viewer  [expanded]="false" [json]="viwer"></ngx-json-viewer>
+        </div>
+      </div>
+    </div> 
+  </div>
 </div>

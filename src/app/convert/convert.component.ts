@@ -66,7 +66,11 @@ export class ConvertComponent {
         this.isDownloadable = true;
         this.toastr.success("Converted Pdf to Word!" , "Success")
       }
-      URL.revokeObjectURL(this.downloadUrl);
+    //   const link = document.createElement('a');
+    // link.href = this.downloadUrl;
+    // link.download = this.FileName || 'converted.pdf';
+    // link.click();
+      // URL.revokeObjectURL(this.downloadUrl);
     },
     error :(err)=>{
       this.isappearwtp = false;
@@ -85,7 +89,7 @@ export class ConvertComponent {
         this.toastr.error( "Select One File","Error")
       }
       
-      URL.revokeObjectURL(this.downloadUrl);
+      // URL.revokeObjectURL(this.downloadUrl);
     }
     });
   } 

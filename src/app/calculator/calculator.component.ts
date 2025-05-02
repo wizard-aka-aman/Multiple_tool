@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormControl, FormsModule } from '@angular/forms';
+import {  FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-calculator',
-  imports: [FormsModule],
+  imports: [FormsModule , CommonModule],
   templateUrl: './calculator.component.html',
   styleUrl: './calculator.component.css'
 })
@@ -13,8 +14,7 @@ export class CalculatorComponent {
   constructor() {
 
     console.log(this.iddisplay);
-
-    document.addEventListener("keydown", ({ keyCode, key }) => {
+    document.addEventListener("keydown", ({ key }) => {
 
       let keys: string = key;
 
@@ -50,12 +50,16 @@ export class CalculatorComponent {
         case "+": this.iddisplay += "+"
           break;
         case "Enter":  this.iddisplay = eval(this.iddisplay);
+        this.iddisplay = this.iddisplay.toString().slice(0, 13);
           break;
         case "Backspace": this.iddisplay = this.iddisplay.toString().slice(0, -1);
           break;
 
       } 
     });
+  }
+  get isLongText(): boolean {
+    return this.iddisplay.length > 12;
   }
 
   clicked(value: string) {
@@ -65,6 +69,7 @@ export class CalculatorComponent {
     }
     if (value == "=") {
       this.iddisplay = eval(this.iddisplay);
+      this.iddisplay = this.iddisplay.toString().slice(0, 13);
       return;
     }
     if (value == "AC") {

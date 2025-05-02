@@ -1,10 +1,10 @@
 <div class="calculator"> 
     <form >
         <div class="display">
-            <input type="text" name="display" [(ngModel)]="iddisplay" id="iddisplay"  disabled>
+            <input type="text"    [ngClass]="{ 'long-text': isLongText,'long-textq': isLongText }" name="iddisplay" [(ngModel)]="iddisplay" id="iddisplay"  disabled>
         </div>
         <div>
-            <input type="button" value="AC" (click)="clicked('AC')" class="operator">
+            <input type="button"  value="AC" (click)="clicked('AC')" class="operator">
             <input type="button" value="DE" (click)="clicked('DE')" class="operator">
             <input type="button" value="."  (click)="clicked('.')" class="operator">
             <input type="button" value="/"  (click)="clicked('/')"  class="operator">

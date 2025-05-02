@@ -47,3 +47,18 @@ form .display input{
     width: 140px !important;
     color: gold;
 } 
+form .display input {
+    text-align: right;
+    flex: 1;
+    font-size: 45px;
+    box-shadow: none;      
+}
+form .display input:focus {
+    caret-color: #12f569; /* Optional: to match your theme */
+}
+.long-text {
+    direction: rtl;
+}
+.long-textq {
+    font-size: 20px !important;
+}

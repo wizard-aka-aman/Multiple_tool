@@ -20,7 +20,7 @@
           </div> 
     </div>
 </div> -->
-<div class="container-fluid">
+<!-- <div class="container-fluid">
   <div class="row" style="height: 88.5vh; overflow: hidden;">
     
     <div class="col-md-6 d-flex flex-column p-4 text-white" style="background-color: #232424;">
@@ -35,7 +35,7 @@
       <button class="btn btn-success align-self-end" (click)="onSend()">View as JSON</button>
     </div>
 
-    <div class="col-6" style="background-color: rgb(230, 255, 236); height: 88.5vh; display: flex; flex-direction: column;">
+    <div class="col-6" style="background-color: rgb(230, 255, 236); height: 88.5vh;  ">
       <h3 class="text-center">Viewer</h3>
       
       
@@ -45,5 +45,33 @@
         </div>
       </div>
     </div> 
+  </div>
+</div> -->
+
+<div class="container-fluid">
+  <div class="row flex-column flex-md-row" style="height: 100vh; overflow: hidden;">
+    
+    <!-- Left Panel: Text Input -->
+    <div class="col-12 col-md-6 d-flex flex-column p-4 text-white" style="background-color: #232424;">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0">Text Input</h4>
+        <button class="btn btn-outline-light" (click)="copy()" title="Copy to clipboard">Copy</button>
+      </div>
+
+      <textarea [(ngModel)]="text" class="form-control mb-3 flex-grow-1" 
+        style="resize: none;" placeholder="Enter your text here..."></textarea>
+
+      <button class="btn btn-success align-self-end" (click)="onSend()">View as JSON</button>
+    </div>
+
+    <!-- Right Panel: JSON Viewer -->
+    <div class="col-12 col-md-6 d-flex flex-column p-4" style="background-color: #e6ffec;">
+      <h4 class="text-center mb-3">Viewer</h4>
+
+      <div class="flex-grow-1 overflow-auto border rounded p-3 bg-white" style="min-height: 0;">
+        <ngx-json-viewer [expanded]="false" [json]="viwer"></ngx-json-viewer>
+      </div>
+    </div>
+    
   </div>
 </div>

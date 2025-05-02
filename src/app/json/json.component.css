@@ -18,7 +18,7 @@ button:hover {
   transform: scale(1.05);
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 765px) {
   .right-side { 
     max-height: 65% !important;
     /* background-color: #1e1e1e !important;  */

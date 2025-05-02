@@ -49,7 +49,7 @@
 </div> -->
 
 <div class="container-fluid">
-  <div class="row flex-column flex-md-row" style="height: 100vh; overflow: hidden;">
+  <div class="row  " style="height: 100vh; overflow: hidden;">
     
     <!-- Left Panel: Text Input -->
     <div class="col-12 col-md-6 d-flex flex-column p-4 text-white" style="background-color: #232424;">
@@ -63,15 +63,19 @@
 
       <button class="btn btn-success align-self-end" (click)="onSend()">View as JSON</button>
     </div>
-
-    <!-- Right Panel: JSON Viewer -->
-    <div class="col-12 col-md-6 d-flex flex-column p-4" style="background-color: #e6ffec;">
-      <h4 class="text-center mb-3">Viewer</h4>
-
-      <div class="flex-grow-1 overflow-auto border rounded p-3 bg-white" style="min-height: 0;">
-        <ngx-json-viewer [expanded]="false" [json]="viwer"></ngx-json-viewer>
+ 
+   
+    
+     <div class="col-12 col-md-6" style="background-color: rgb(230, 255, 236); height: 88.5vh;  ">
+      <h3 class="text-center">Viewer</h3>
+      
+      
+      <div class="right-side" style="max-height: 93%; overflow: auto;  " >
+        
+          <ngx-json-viewer  [expanded]="false" [json]="viwer"></ngx-json-viewer>
+        
       </div>
-    </div>
+    </div> 
     
   </div>
 </div>

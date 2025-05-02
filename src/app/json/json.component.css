@@ -20,7 +20,6 @@ button:hover {
 
 @media screen and (max-width: 765px) {
   .right-side { 
-    max-height: 65% !important;
-    /* background-color: #1e1e1e !important;  */
+    max-height: 65% !important; 
   }
 }

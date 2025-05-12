@@ -74,7 +74,7 @@
 
         <!-- To Time -->
         <div>
-          <label class="form-label mb-3 me-3">To:</label>
+          <label class="form-label mb-3 me-3">Time:</label>
           <input type="datetime-local" [(ngModel)]="dateTimeLocal" name="dateTimeLocal" id="">
          <div class="d-flex justify-content-center" [style.transform]="'rotate(' + angle + 'deg)'" 
   [style.transition]="'transform 0.5s'" 
@@ -82,7 +82,7 @@
 >
   <i class="fs-2 fa-solid fa-rotate"></i>
 </div>
-
+            <label class="form-label mb-3 me-3">To:</label>
           <select class="form-select" [(ngModel)]="ToselectedTime" name="toCurrency">
             <option *ngFor="let item of countries" [value]="item.id">
                 {{item.id}}

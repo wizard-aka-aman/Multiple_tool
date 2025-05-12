@@ -2,6 +2,7 @@ import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-time-and-currency',
@@ -23,13 +24,11 @@ export class TimeAndCurrencyComponent {
     date = new Date();
     timeAnswer :any;  
     postdata :any= {};
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient ,private toastr: ToastrService) {
     // this.http.get("https://api.currencyapi.com/v3/currencies?apikey=cur_live_pimw5v6L4rXNT7r06CSRXdBFLNN2uBCHBlBu5fYA").subscribe((res: any) => {
     //   this.data = res.data;   
     //     //Object.values is used to convert into array 
     //     this.currencyList = Object.values(this.data);   
-        
-        
     //   })
       
        this.http.get("https://api.opentimezone.com/timezones").subscribe((res: any) => { 
@@ -55,7 +54,15 @@ export class TimeAndCurrencyComponent {
     this.postdata.fromTimezone=this.FromselectedTime;
     this.postdata.toTimezone =this.ToselectedTime;
     console.log(this.postdata);
-    
+    if(this.dateTimeLocal == ""){
+      this.toastr.error("Please Provide the Time" , "Error");
+    } else if(this.FromselectedTime == ""){
+      this.toastr.error("Please Select the From Timezone" , "Error");
+    }
+    else if(this.ToselectedTime == ""){
+      this.toastr.error("Please Select the To Timezone" , "Error");
+    }
+
       this.http.post("https://api.opentimezone.com/convert",this.postdata).subscribe((res: any) => { 
     
       console.log(res);
@@ -71,5 +78,4 @@ swap(){
 }
 angle = 0;
  
-
 }

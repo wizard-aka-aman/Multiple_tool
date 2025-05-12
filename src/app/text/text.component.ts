@@ -66,8 +66,8 @@ export class TextComponent {
     if (this.text.length ==0 ) {
       return 0;
     }
-    var  res = this.text.trim().split(/\s+/).length-1+1  ; 
-    return res *0.08;
+    var  res = this.text.trim().split(/\s+/).length; 
+    return res *0.008;
   }
 
 }

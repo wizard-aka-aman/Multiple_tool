@@ -19,21 +19,18 @@ export class TimeAndCurrencyComponent {
   FromselectedTime :any = "";
   ToselectedTime :any = ""; 
   countries :any
-  convertedAnswer : any;
-  TimeAnswerBase : any;
-  TimeAnswerTarget : any; 
+  convertedAnswer : any;  
     date = new Date();
-    timeAnswer :any; 
-
+    timeAnswer :any;  
     postdata :any= {};
     constructor(private http: HttpClient) {
-    // this.http.get("https://api.currencyapi.com/v3/currencies?apikey=cur_live_pimw5v6L4rXNT7r06CSRXdBFLNN2uBCHBlBu5fYA").subscribe((res: any) => {
-    //   this.data = res.data;   
-    //     //Object.values is used to convert into array 
-    //     this.currencyList = Object.values(this.data);   
+    this.http.get("https://api.currencyapi.com/v3/currencies?apikey=cur_live_pimw5v6L4rXNT7r06CSRXdBFLNN2uBCHBlBu5fYA").subscribe((res: any) => {
+      this.data = res.data;   
+        //Object.values is used to convert into array 
+        this.currencyList = Object.values(this.data);   
         
         
-    //   })
+      })
       
        this.http.get("https://api.opentimezone.com/timezones").subscribe((res: any) => { 
       this.countries =res  
@@ -43,14 +40,14 @@ export class TimeAndCurrencyComponent {
   }
 
   Currencyconvert(){ 
-    //   this.http.get("https://api.currencyapi.com/v3/latest?apikey=cur_live_pimw5v6L4rXNT7r06CSRXdBFLNN2uBCHBlBu5fYA").subscribe((res: any) => {
-    //     console.log(res);
+      this.http.get("https://api.currencyapi.com/v3/latest?apikey=cur_live_pimw5v6L4rXNT7r06CSRXdBFLNN2uBCHBlBu5fYA").subscribe((res: any) => {
+        console.log(res);
         
-    //   this.convertedAnswer = this.input / res.data[this.FromselectedCurrencyCode].value;  
-    //   this.convertedAnswer =  this.convertedAnswer * res.data[this.ToselectedCurrencyCode].value; 
-    //   // used to display the symbol of the currency
-    //   // this.convertedAnswer = this.data[this.ToselectedCurrencyCode].symbol+" " +this.convertedAnswer;   
-    // })  
+      this.convertedAnswer = this.input / res.data[this.FromselectedCurrencyCode].value;  
+      this.convertedAnswer =  this.convertedAnswer * res.data[this.ToselectedCurrencyCode].value; 
+      // used to display the symbol of the currency
+      // this.convertedAnswer = this.data[this.ToselectedCurrencyCode].symbol+" " +this.convertedAnswer;   
+    })  
     
   }
   Timeconvert(){  

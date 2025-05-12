@@ -1,0 +1,99 @@
+<div class="container-fluid">
+  <div class="row h-100 overflow-hidden">
+    <!-- Left Panel: Converter -->
+    <div class="col-12 col-md-6 d-flex flex-column p-4 text-white" style="background-color: #232424;">
+      <div class="text-center mb-4">
+        <h2 class="fw-bold">Currency Converter</h2>
+      </div>
+
+      <form class="d-flex flex-column gap-3">
+        <!-- From Amount & Currency -->
+        <div>
+          <label class="form-label">From:</label>
+          <div class="d-flex flex-column flex-md-row gap-2">
+            <!-- <input type="number" class="form-control" [(ngModel)]="input" name="amount" placeholder="Enter amount"/> -->
+
+            <div class="input-group ">
+              <span class="input-group-text"> {{ FromselectedCurrencyCode}}</span>
+              <input type="number"  [(ngModel)]="input" name="input" class="form-control"  > 
+            </div>
+
+            <select class="form-select" [(ngModel)]="FromselectedCurrencyCode" name="fromCurrency">
+              <option *ngFor="let item of currencyList" [value]="item.code">
+                {{item.code}} - {{item.name}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- To Currency -->
+        <div>
+          <label class="form-label">To:</label>
+          <select class="form-select" [(ngModel)]="ToselectedCurrencyCode" name="toCurrency">
+            <option *ngFor="let item of currencyList" [value]="item.code">
+              {{item.code}} - {{item.name}}
+            </option>
+          </select>
+        </div>
+
+        <!-- Convert Button -->
+        <button type="button" class="btn btn-light mt-2 w-100 fw-semibold" (click)="Currencyconvert()">
+          Convert
+        </button>
+
+        <!-- Result -->
+        <div class="bg-dark text-white p-3 rounded mt-3 text-center fs-5" *ngIf="convertedAnswer">
+          <!-- {{ convertedAnswer }} <br> <br> -->
+          {{ convertedAnswer | currency: ToselectedCurrencyCode : 'symbol' : '4.2-2'  }}
+          
+        </div>
+      </form>
+    </div>
+
+    <!-- Right Panel: Viewer -->
+    <div class="col-12 col-md-6 d-flex flex-column" style="background-color: rgb(230, 255, 236); height: 100vh;">
+     
+      <div class="right-side flex-grow-1 overflow-auto p-3 " style="max-height: calc(100vh - 80px);">
+        <div class="text-center mb-4">
+        <h2 class="fw-bold">Time Converter</h2>
+      </div>
+
+      <form class="d-flex flex-column gap-3 ">
+         
+        <div>
+          <label class="form-label">From:</label>
+          <div class="d-flex flex-column flex-md-row gap-2">
+            
+            <select class="form-select" [(ngModel)]="FromselectedTime" name="fromCurrency">
+              <option *ngFor="let item of countries" [value]="item.id">
+                {{item.id}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- To Time -->
+        <div>
+          <label class="form-label mb-3">To:</label>
+          <input type="datetime-local" [(ngModel)]="dateTimeLocal" name="dateTimeLocal" id="">
+          <select class="form-select" [(ngModel)]="ToselectedTime" name="toCurrency">
+            <option *ngFor="let item of countries" [value]="item.id">
+                {{item.id}}
+            </option>
+          </select>
+        </div>
+
+        <!-- Convert Button -->
+        <button type="button" class="btn btn-light mt-2 w-100 fw-semibold" (click)="Timeconvert()">
+          Convert
+        </button>
+
+        <!-- Result -->
+        <div class="bg-dark text-white p-3 rounded mt-3 text-center fs-5" *ngIf="timeAnswer">
+          {{timeAnswer | date: 'medium' }}
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>

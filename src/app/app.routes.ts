@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { JsonComponent } from './json/json.component';
 import { ConvertComponent } from './convert/convert.component';
+import { TextComponent } from './text/text.component';
+import { TimeAndCurrencyComponent } from './time-and-currency/time-and-currency.component';
 
 export const routes: Routes = [
     {
@@ -20,5 +22,13 @@ export const routes: Routes = [
     {
         path:"converter",
         component: ConvertComponent
+    },
+    {
+        path:"text",
+        component: TextComponent
+    },
+    {
+        path:"time-and-currency",
+        component: TimeAndCurrencyComponent
     }
 ];

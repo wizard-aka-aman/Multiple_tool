@@ -1,0 +1,23 @@
+ 
+<div class="container-fluid">
+    <div class="row  " style="height: 88.5vh; overflow: hidden;"> 
+      <div class="col-12 col-md-12 d-flex flex-column p-4 text-white" style="background-color: #232424;">
+        <div class="align-items-center mb-3" >  
+           <h4 class=" "  >Text Input</h4>  
+          <button class="btn btn-outline-light me-3 my-2" (click)="copy()"  title="Copy to clipboard">Copy</button>
+          <button class="btn btn-outline-light me-3 my-2" (click)="uppercase()">UpperCase</button>
+          <button class="btn btn-outline-light me-3 my-2" (click)="lowercase()">LowerCase</button>
+          <button class="btn btn-outline-light me-3 my-2" (click)="titlecase()">TitleCase</button>
+          <button class="btn btn-outline-light me-3 my-2" (click)="formate()">Formate</button>
+          <button class="btn btn-outline-light me-3 my-2" (click)="sentancecase()">Sentance Case</button>
+          <button class="btn btn-outline-light me-3 my-2" (click)="clear()">Clear Text</button>
+           
+        </div> 
+        <textarea  [(ngModel)]="text" class="form-control mb-3 flex-grow-1"  
+          style="resize: none;  " placeholder="Enter your text here..."></textarea> 
+          {{wordCount}} words, {{charCount}} characters {{sentance}} Sentance <br>
+          {{minuteRead}} minutes read
+      </div>   
+    </div>
+  </div>
+  

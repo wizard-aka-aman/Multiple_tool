@@ -56,11 +56,14 @@ export class TimeAndCurrencyComponent {
     console.log(this.postdata);
     if(this.dateTimeLocal == ""){
       this.toastr.error("Please Provide the Time" , "Error");
+      return;
     } else if(this.FromselectedTime == ""){
       this.toastr.error("Please Select the From Timezone" , "Error");
+      return;
     }
     else if(this.ToselectedTime == ""){
       this.toastr.error("Please Select the To Timezone" , "Error");
+      return;
     }
 
       this.http.post("https://api.opentimezone.com/convert",this.postdata).subscribe((res: any) => { 

@@ -8,14 +8,14 @@
           <button class="btn btn-outline-light me-3 my-2" (click)="uppercase()">UpperCase</button>
           <button class="btn btn-outline-light me-3 my-2" (click)="lowercase()">LowerCase</button>
           <button class="btn btn-outline-light me-3 my-2" (click)="titlecase()">TitleCase</button>
-          <button class="btn btn-outline-light me-3 my-2" (click)="formate()">Formate</button>
-          <button class="btn btn-outline-light me-3 my-2" (click)="sentancecase()">Sentance Case</button>
+          <button class="btn btn-outline-light me-3 my-2" (click)="formate()">Format</button>
+          <button class="btn btn-outline-light me-3 my-2" (click)="sentancecase()">Sentence Case</button>
           <button class="btn btn-outline-light me-3 my-2" (click)="clear()">Clear Text</button>
            
         </div> 
         <textarea  [(ngModel)]="text" class="form-control mb-3 flex-grow-1"  
           style="resize: none;  " placeholder="Enter your text here..."></textarea> 
-          {{wordCount}} words, {{charCount}} characters {{sentance}} Sentance <br>
+          {{wordCount}} words, {{charCount}} characters {{sentance}} Sentence <br>
           {{minuteRead}} minutes read
       </div>   
     </div>

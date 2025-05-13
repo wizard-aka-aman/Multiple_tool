@@ -14,7 +14,7 @@ export class StopwatchComponent {
   count :number = 0;
   intervalId :any;
   isStarted : boolean = false;
-  lapnumber :number = 1; 
+  lapnumber :number = 0; 
   @ViewChild('tbody') tbody?: ElementRef;
   start() {
     this.intervalId = setInterval(() => {
@@ -45,9 +45,9 @@ export class StopwatchComponent {
     const lapbody = document.getElementById('laptbody');
     const laprow = document.createElement('tr');
     const lapcell1 = document.createElement('td');
-    const lapcell2 = document.createElement('td');
-    lapcell1.textContent  = "Lap "+this.lapnumber.toString();
+    const lapcell2 = document.createElement('td'); 
     this.lapnumber++;
+    lapcell1.textContent  = "Lap "+this.lapnumber.toString();
     lapcell2.textContent  = this.formattedTime
     
     laprow?.appendChild(lapcell1);

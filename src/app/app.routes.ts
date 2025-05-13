@@ -5,6 +5,7 @@ import { ConvertComponent } from './convert/convert.component';
 import { TextComponent } from './text/text.component';
 import { TimeAndCurrencyComponent } from './time-and-currency/time-and-currency.component';
 import { StopwatchComponent } from './stopwatch/stopwatch.component';
+import { AlarmComponent } from './alarm/alarm.component';
 
 export const routes: Routes = [
     {
@@ -35,6 +36,9 @@ export const routes: Routes = [
     {
         path: "stopwatch",
         component : StopwatchComponent
-        
+    },
+    {
+        path: "alarm",
+        component : AlarmComponent
     }
 ];

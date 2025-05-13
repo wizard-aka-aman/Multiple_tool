@@ -1,0 +1,61 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white text-center">
+          <h3>Alarm Clock</h3>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <p for="alarmTime" class="form-label text-center fs-4">Set Alarm Time</p> 
+          </div>
+            <!-- <div class="mb-3">
+                    <label for="description" class="form-label fs-5">Description:</label>
+                    <input type="text" class="form-control" [(ngModel)]="data.description" name="description">
+                </div> -->
+    
+                <div class="mb-3">
+                    <label for="completed" class="form-label fs-5">Select Time:</label>
+                    <input type="datetime-local" class="form-control" [(ngModel)]="data.completed" name="completed">
+                </div>
+    
+          <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
+            <button
+              class="btn btn-success me-md-2"
+              id="setAlarmBtn"
+              type="button"
+               (click)="getSubmit()"
+            >
+              Set Alarm
+            </button>
+            <button class="btn btn-danger" id="clearAlarmBtn" type="button" (click)="clear()">
+              Clear Alarm
+            </button>
+          </div>
+          <div class="text-center">
+            <h5>Current Time: {{date |date :'medium'  }}</h5>
+            <p id="currentTime" class="fs-4"></p>
+            <!-- <h5>Alarm Status:</h5>
+            <p id="alarmStatus" class="fs-5 text-danger"></p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<!-- Example modal HTML -->
+<!-- <div id="alarmModal" style="display:none;">
+    <p>Alarm Time!</p>
+    <button onclick="document.getElementById('alarmModal').style.display='none'">Close</button>
+</div> -->
+<button (click)="enableSound()">Enable Sound</button>
+
+
+<div class="card" style="width: 50rem; display: none; height: 25rem; z-index: 100;top: 25%; left: 25%; position: absolute;"id="alarmModal" > 
+  <div class="card-body">
+      <h5 class="card-title" style="font-size: 50px;">Alarm .......</h5>
+      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+      <button onclick="document.getElementById('alarmModal').style.display='none'">Stop</button>
+  </div>
+</div>

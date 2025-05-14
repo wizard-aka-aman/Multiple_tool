@@ -1,80 +1,112 @@
-import { AsyncPipe, DatePipe } from '@angular/common';
+import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import * as signalR from '@microsoft/signalr';
+import { interval, map, Observable } from 'rxjs';
 
 
 @Component({
   selector: 'app-alarm',
-  imports: [DatePipe , FormsModule],
+  imports: [DatePipe, FormsModule, AsyncPipe, CommonModule],
   templateUrl: './alarm.component.html',
   styleUrl: './alarm.component.css'
 })
 export class AlarmComponent {
 
-    data :  any = { 
-    "description" :   'a',  
-    "completed" : '', 
+  data: any = {
+    "completed": '',
   };
+  allAlarm: any;
+  emailItemDto: any;
+  date: Date = new Date();
+  currentTime: Observable<Date> = new Observable<Date>;
+  lapnumber: number = 1;
 
-  emailItemDto :any ;
-  date :Date = new Date(); 
-  constructor( private toastr : ToastrService , private http : HttpClient) {   
-    
+  constructor(private toastr: ToastrService, private http: HttpClient) {
+
+    this.http.get("https://localhost:7259/api/Alarm/GetAlarm").subscribe((res: any) => {
+      console.log(res);
+
+      this.allAlarm = res;
+    })
+
+
+    this.currentTime = interval(1000).pipe(map(() => new Date()));
     const connection = new signalR.HubConnectionBuilder()
-    .withUrl("https://localhost:7259/alarmHub")
-    .build();
-    
+      .withUrl("https://localhost:7259/alarmHub")
+      .build();
+
     connection.on("AlarmTriggered", function (message) {
-         const audio = new Audio('assets/sounds/sound.mp3');
-  audio.play().catch(err => console.error("Audio error:", err));
+      const audio = new Audio('assets/sounds/sound.mp3');
+      audio.play().catch(err => console.error("Audio error:", err));
 
 
       console.log(message);
-      
+
       document.getElementById("alarmModal")!.style.display = "block";
     });
     connection.start().catch(err => console.error(err.toString()));
 
-  } 
+  }
   soundEnabled = false;
+  getAllAlarm() {
+    this.http.get("https://localhost:7259/api/Alarm/GetAlarm").subscribe((res: any) => {
+      console.log(res);
 
-enableSound() {
-  const audio = new Audio('assets/sounds/sound.mp3');
-  audio.play().then(() => {
-    this.soundEnabled = true;
-    console.log('Sound unlocked and ready');
-  }).catch(err => {
-    console.error('User gesture not registered yet:', err);
-  });
-}
-
-
-
-  getSubmit(){
-    this.emailItemDto = { 
-      Body: this.data.description, 
-      Completed : this.data.completed, 
-    };
-     
-    this.http.post("https://localhost:7259/api/Job/CreateScheduleJob",this.emailItemDto).subscribe({
-      next:(res:any)=>{
-        this.toastr.success("Alarm Created successfully " , "success");
-        console.log(res);
-        // console.log("alarm created")
-      },
-      error:(err:any)=>{
-        this.toastr.error(err.error , "error")
-        console.log(err);
-      }
+      this.allAlarm = res;
     })
   }
-clear(){
-  this.data.description = '';
-  this.data.completed = '';
-}
+
+  enableSound() {
+    const audio = new Audio('assets/sounds/sound.mp3');
+    audio.play().then(() => {
+      this.soundEnabled = true;
+      console.log('Sound unlocked and ready');
+    }).catch(err => {
+      console.error('Audio play failed:', err);
+    });
+  }
+
+  getSubmit() {
+    this.emailItemDto = {
+      Completed: this.data.completed,
+      name: "Alarm " + this.lapnumber
+    }; 
+    console.log(this.emailItemDto);
 
 
+
+    
+    this.http.post("https://localhost:7259/api/Job/CreateScheduleJob", this.emailItemDto).subscribe({
+      next: (res: any) => {
+          this.lapnumber++;
+          this.getAllAlarm();
+          this.toastr.success("Alarm Created successfully ", "success");
+          console.log(res);
+        },
+        error: (err: any) => {
+          this.toastr.error("please Enter a Valid Time & Date", "error")
+          console.log(err);
+        }
+      })
+
+    
+  }
+  clear() { 
+    this.data.completed = '';
+  }
+  deletejob(jobid :number){
+    const isdelete = confirm("Sure you want to Delete this Alarm?");
+    if(isdelete){
+      this.http.delete("https://localhost:7259/api/Job/DeleteAlarm/"+jobid).subscribe((res:any)=>{
+        this.getAllAlarm();
+        this.toastr.success("Alarm Deleted successfully ", "success");
+        console.log(res);
+        
+      })
+    }
+  }
+ 
 }

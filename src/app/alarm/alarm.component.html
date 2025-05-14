@@ -8,11 +8,7 @@
         <div class="card-body">
           <div class="mb-3">
             <p for="alarmTime" class="form-label text-center fs-4">Set Alarm Time</p> 
-          </div>
-            <!-- <div class="mb-3">
-                    <label for="description" class="form-label fs-5">Description:</label>
-                    <input type="text" class="form-control" [(ngModel)]="data.description" name="description">
-                </div> -->
+          </div> 
     
                 <div class="mb-3">
                     <label for="completed" class="form-label fs-5">Select Time:</label>
@@ -29,33 +25,47 @@
               Set Alarm
             </button>
             <button class="btn btn-danger" id="clearAlarmBtn" type="button" (click)="clear()">
-              Clear Alarm
+              Clear 
             </button>
           </div>
           <div class="text-center">
-            <h5>Current Time: {{date |date :'medium'  }}</h5>
-            <p id="currentTime" class="fs-4"></p>
-            <!-- <h5>Alarm Status:</h5>
-            <p id="alarmStatus" class="fs-5 text-danger"></p> -->
+            <h5>Current Time: {{date |date :'mediumDate'  }} {{currentTime |async | date:'hh:mm:ss'}}</h5>
+            <p id="currentTime" class="fs-4"></p> 
+            <button (click)="enableSound()" class="div5">Enable Sound</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+  
 </div> 
 
-<!-- Example modal HTML -->
-<!-- <div id="alarmModal" style="display:none;">
-    <p>Alarm Time!</p>
-    <button onclick="document.getElementById('alarmModal').style.display='none'">Close</button>
-</div> -->
-<button (click)="enableSound()">Enable Sound</button>
+
+ <!-- Lap Table -->
+  <div class="row justify-content-center mt-5">
+    <div class="col-10">
+      <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th class="text-center">Alarm Id</th>
+            <th class="text-center">Time</th>
+            <th class="text-center">Delete</th>
+          </tr>
+          <tr *ngFor="let item of allAlarm">
+            <td class="text-center">{{item.id}}</td>
+            <td class="text-center">{{item.time}}</td>
+            <td class="text-center" ><i class="fa-solid fa-trash" (click)="deletejob(item.jobid)" style="cursor: pointer;" ></i></td>
+          </tr>
+        </thead>
+        <tbody class="text-center" id="laptbody" #tbody></tbody>
+      </table>
+    </div>
+  </div>
 
 
-<div class="card" style="width: 50rem; display: none; height: 25rem; z-index: 100;top: 25%; left: 25%; position: absolute;"id="alarmModal" > 
+<div class="card" style="width: 25rem; display: none; height: 25rem; z-index: 100;top: 25%; left: 25%; position: absolute;"id="alarmModal" > 
   <div class="card-body">
-      <h5 class="card-title" style="font-size: 50px;">Alarm .......</h5>
-      <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-      <button onclick="document.getElementById('alarmModal').style.display='none'">Stop</button>
+      <h5 class="card-title" style="font-size: 50px;">Alarm .......</h5> 
+      <button onclick="document.getElementById('alarmModal').style.display='none'" (click)="getAllAlarm()">Stop</button>
   </div>
 </div>

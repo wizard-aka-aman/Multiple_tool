@@ -31,7 +31,8 @@
           <div class="text-center">
             <h5>Current Time: {{date |date :'mediumDate'  }} {{currentTime |async | date:'hh:mm:ss'}}</h5>
             <p id="currentTime" class="fs-4"></p> 
-            <button (click)="enableSound()" class="div5">Enable Sound</button>
+            <button (click)="enableSound()" >Enable Sound</button>
+            <button (click)="disabledSound()" >Disable Sound</button>
           </div>
         </div>
       </div>

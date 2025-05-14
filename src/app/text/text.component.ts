@@ -38,7 +38,10 @@ export class TextComponent {
     this.text = this.text.trim().split(/\s+/).toString().replaceAll(",", " "); 
   }
   sentancecase() {
-    this.text = this.text.trim().split(".").map(e => e.charAt(0).toUpperCase() + e.slice(1).toLowerCase()).join(".");
+    this.text = this.text
+    .toLowerCase().replace(/(^\s\w|[.!\?]\s\w)/g, (match) => match.toUpperCase());
+
+
   }
   clear() {
     this.text = "";

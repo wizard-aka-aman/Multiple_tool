@@ -19,7 +19,7 @@ export class TimeAndCurrencyComponent {
   ToselectedCurrencyCode :string = "";
   FromselectedTime :any = "";
   ToselectedTime :any = ""; 
-  countries :any
+  countries :any ;
   convertedAnswer : any;  
     date = new Date();
     timeAnswer :any;  
@@ -28,8 +28,8 @@ export class TimeAndCurrencyComponent {
     
       
        this.http.get("https://api.opentimezone.com/timezones").subscribe((res: any) => { 
-      this.countries =res  
-      // console.log(res);
+      this.countries =res   
+      console.log(res);
       })
        
   }

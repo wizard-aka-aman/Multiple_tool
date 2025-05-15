@@ -1,10 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { generate, count } from "random-words";
+import { generate, count } from "random-words"; 
+
 
 @Component({
   selector: 'app-typing',
-  imports: [FormsModule],
+  imports: [FormsModule ],
   templateUrl: './typing.component.html',
   styleUrl: './typing.component.css'
 })
@@ -18,23 +19,38 @@ export class TypingComponent {
   userwpm : number = 0;
   TotalWordsAttemped :number =0 ;
   CorrectedWordAttemped : number =0;
+  startIntervalbeforeTyping : any;
+  @ViewChild('textArea') textAreaRef!: ElementRef;
   constructor() { 
     this.startTyping();
     
   }
-  async startTyping() { 
-    this.givenText = await generate(216).toString().replaceAll(',',' ');
+  reset(){
+    this.startTyping();
+    this.inputText = "";
+    this.seconds = 0;
+    this.useraccuracy = 0;
+    this.userwpm = 0;
+    this.TotalWordsAttemped = 0 ;
+    this.CorrectedWordAttemped = 0 ;
+    this.textAreaRef.nativeElement.focus();
+    
+  }
+    startTyping() { 
+    this.givenText =  generate(216).toString().replaceAll(',',' ');
   //  console.log(this.givenText);
+
+   console.log(this.startIntervalbeforeTyping);
    
-   const ctor = setInterval(()=>{
+    if(this.startIntervalbeforeTyping == undefined){
+       this.startIntervalbeforeTyping = setInterval(()=>{
       if(this.inputText != ""){
       this.isStarted = true;
       this.start();
-      clearInterval(ctor);
-      
-
+      clearInterval(this.startIntervalbeforeTyping);
     }
     },1)
+    }
 }
  
   start() {
@@ -46,15 +62,17 @@ export class TypingComponent {
         clearInterval(this.intervalId);
         this.isStarted = false;
         this.seconds = 0;
-        this.inputText = ""
-        // document.getElementById("alarmModal")!.style.display = "block";
+        this.inputText = "" 
+        this.startIntervalbeforeTyping = undefined
           
-      this.startTyping();
+      // this.startTyping();
       }
     }, 100);
   }
 
   get accuracy() : any{ 
+    console.log("accuracy function");
+    
     this.inputText = this.inputText.trim();
     const typedWords = this.inputText.split(' ');
     let correctedWords = 0;

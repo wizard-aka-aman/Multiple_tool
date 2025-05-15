@@ -47,6 +47,8 @@ export class TextComponent {
     this.text = "";
   }
   get wordCount(): number {
+    console.log("wordcount");
+    
     if (!this.text.trim()) {
       return 0;
     }

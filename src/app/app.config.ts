@@ -7,5 +7,5 @@ import { provideToastr } from 'ngx-toastr';
 import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideHttpClient(),provideAnimations(),provideToastr(),provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]
+	providers: [provideHttpClient(), provideAnimations(), provideToastr(), provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]
 };

@@ -11,17 +11,18 @@
   </div> 
 
   
-  <div class="text-display bg-secondary text-light  p-3 rounded mb-3" style="height: 6em; font-size: 2em; overflow: scroll;">
-    {{givenText}}
+  <div  #textDisplay class="text-display bg-secondary text-light  p-3 rounded mb-3" style="height: 6em; font-size: 2em; overflow: scroll;">
+    <span *ngFor="let item of givenText" [ngClass]="item.isCorrect ? 'text-success':''">{{item.word}} </span>
   </div>
   
-  <textarea #textArea  (change)="accuracy" (change)="wpm" [(ngModel)]="inputText"  class="form-control bg-dark text-white border-secondary mb-3" 
+  <textarea #textArea (ngModelChange)="accuracy()"  (change)="wpm()" [(ngModel)]="inputText"  class="form-control bg-dark text-white border-secondary mb-3" 
   placeholder="Start typing here..."  autofocus [disabled]="seconds >=60"  style="resize: none; font-size: 2em;"></textarea>
   
   
   <div class="stats d-flex flex-column flex-md-row justify-content-between align-items-center mb-4" style="font-size: 2em;">
     <div>WPM: <span id="wpm">{{userwpm}}</span></div>
     <div>Accuracy: <span id="accuracy">{{useraccuracy.toFixed(2)}}%</span></div>
+    <!-- <div>Accuracy: <span id="accuracy">{{accuracy}}%</span></div> -->
   </div>
   <div class="stats d-flex flex-column flex-md-row justify-content-between align-items-center mb-4" style="font-size: 2em;">
     <div>Total Words Attemped : <span id="wpm">{{TotalWordsAttemped}}</span></div>

@@ -4,8 +4,7 @@ import { JsonComponent } from './json/json.component';
 import { ConvertComponent } from './convert/convert.component';
 import { TextComponent } from './text/text.component';
 import { TimeAndCurrencyComponent } from './time-and-currency/time-and-currency.component';
-import { StopwatchComponent } from './stopwatch/stopwatch.component';
-import { AlarmComponent } from './alarm/alarm.component';
+import { StopwatchComponent } from './stopwatch/stopwatch.component'; 
 import { TypingComponent } from './typing/typing.component';
 
 export const routes: Routes = [
@@ -38,10 +37,11 @@ export const routes: Routes = [
         path: "stopwatch",
         component : StopwatchComponent
     }
-    // ,{
-    //     path: "alarm",
-    //     component : AlarmComponent
-    // }
+    ,{
+        path: "alarm",
+        loadComponent : ()=>
+            import('./alarm/alarm.component').then(e => e.AlarmComponent)
+    }
     ,{
         path : "typing",
         component :TypingComponent 

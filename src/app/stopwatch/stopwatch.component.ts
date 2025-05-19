@@ -41,7 +41,7 @@ export class StopwatchComponent {
   }
 
   lap(){
-    console.log(this.minute + " - " + this.seconds + " - " + this.mili);
+    // console.log(this.minute + " - " + this.seconds + " - " + this.mili);
     const lapbody = document.getElementById('laptbody');
     const laprow = document.createElement('tr');
     const lapcell1 = document.createElement('td');
